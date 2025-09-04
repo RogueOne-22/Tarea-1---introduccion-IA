@@ -2,7 +2,7 @@
 
 <h1 align="center">🤖 Movimiento Aleatorio de un robot </h1>
 
-  Este proyecto implementa una simulación sencilla de un robot en una grid **3x3**, donde el objetivo es que el robot llegue a la posición final **(3, 3)** optimizando su batería y sus movimientos.
+  Este ejercicio implementa una simulación sencilla de un robot en una grid **3x3** (ajustable por código), En donde el objetivo es que el robot llegue a la posición final optimizando sus movimientos.
 
 ---
 
@@ -13,14 +13,14 @@ El robot debe alcanzar la meta en la menor cantidad de pasos posibles, tomando d
 
 ## ⚡ Estrategia del Robot
 
-El robot sigue una **estrategia con aleatoriedad controlada**, es decir:
-- **Movimiento:** puede avanzar **arriba, abajo, izquierda o derecha**.  
-- **Recarga:** si la acción elegida es `recargar`, la batería se reinicia al **100%**.  
+El robot sigue una **estrategia con aleatoriedad controlada**:
+- Puede avanzar **arriba, abajo, izquierda o derecha**.  
+- **Recarga:** la batería se reinicia al **100%**.  
 - **Restricción de batería:**  
   - Si la batería es **> 20**, puede moverse (cada movimiento consume -10).  
   - Si la batería es **≤ 20**, no puede moverse y se le fuerza a recargar.  
-- **Aleatoriedad:** en cada paso, la acción se elige de manera aleatoria entre las posibles (`adelante`, `atrás`, `izquierda`, `derecha`, `recargar`).  
-- **Condición de éxito:** cuando alcanza la posición `(3, 3)`, el robot detiene la ejecución.  
+-  En cada paso, la acción se elige de manera aleatoria entre las posibles (`adelante`, `atrás`, `izquierda`, `derecha`, `recargar`).  
+-  Cuando alcanza la posición `(3, 3)`, el robot detiene la ejecución.  
 
 ---
 
@@ -28,19 +28,17 @@ El robot sigue una **estrategia con aleatoriedad controlada**, es decir:
 - El valor inicial de batería se genera de manera **aleatoria** entre **10 y 100**, en intervalos de 15:  
   `10, 25, 40, 55, 70, 85, 100`.  
 - Cada movimiento cuesta **10 unidades de batería**.  
-- Recargar siempre devuelve la batería a **100%**.
-
 ---
 
 ## 🏆 Sistema de Recompensas
 La recompensa está diseñada para guiar al robot hacia decisiones correctas:
 - `+20` → Si alcanza el objetivo.  
-- `+5` → Si decide recargar.  
+- `+5` → Si decide recargar si la bateria no esta al limite.  
 - `-1` → Si se mueve normalmente.  
 - `-5` → Si intenta moverse con poca batería.  
-- `-10` → Si intenta moverse sin batería (castigo mayor).  
+- `-10` → Si intenta moverse sin batería.  
 
-Esto obliga al robot a **aprender una estrategia eficiente**, aunque las acciones se eligen aleatoriamente.
+Esto obliga al robot a **aprender una estrategia**, aunque las acciones se eligen aleatoriamente.
 
 ## 🚦 Ejemplo de Ejecución
 ```phyton
@@ -62,11 +60,6 @@ Paso 8: Acción = derecha, Estado = {'posicion': (3, 3), 'bateria': 85, 'objetiv
 Recompensa total obtenida: 21
 
 ```
-
-## 🔑 Puntos Clave
-- **determinista**: la batería controla cuándo puede moverse.  
-- **Aleatoriedad** en las decisiones evita que el robot siga siempre el mismo camino. 
-
 ---
 
 ## 🚀 Posibles Mejoras
